@@ -15,15 +15,17 @@ services:
       - syfosmmanuell_backend_pg:/var/lib/postgresql/data
       - ./postgresql/provision-database.sql:/docker-entrypoint-initdb.d/provision-database.sql
 
-  activemq:
-    image: rmohr/activemq
+  ibm-mq:
+    image: ibmcom/mq
     restart: always
     ports:
-      - 61616:61616
-      - 8161:8161
-    volumes:
-      - syfosmmanuell_backend_activemq1_conf:/opt/activemq/conf
-      - syfosmmanuell_backend_activemq1_data:/opt/activemq/data
+    - "1414:1414"
+    - "9157:9157"
+    - "9443:9443"
+    environment:
+      MQ_QMGR_NAME: "MQ1LSC04"
+      LICENSE: "accept"
+      MQ_APP_PASSWORD: "supersekret"
 
   zoo1:
     image: zookeeper:3.4.9
@@ -80,11 +82,8 @@ services:
     ports:
     - 8080:8200
 
-
 volumes:
   syfosmmanuell_backend_pg:
-  syfosmmanuell_backend_activemq1_conf:
-  syfosmmanuell_backend_activemq1_data:
   syfosmmanuell_backend_zoo1_data:
   syfosmmanuell_backend_zoo1_datalog:
   syfosmmanuell_backend_kafka1:
