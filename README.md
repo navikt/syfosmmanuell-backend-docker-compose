@@ -7,3 +7,10 @@ Oppsettet for Kafka (zookeeper, kafkadminrest, schema-registry, openldap) er lå
 You know the drill.
 
 ```docker-compose -f docker-compose.yml up```
+
+## Legge til nødvendige Kafka topics for å tilfredsstille syfosmmanuell-backend
+```curl --user igroup:itest -X POST "http://localhost:8840/api/v1/topics" -H "accept: application/json" -H "content-type: application/json" -d "{ \"name\": \"privat-syfo-sm2013-manuell\", \"numPartitions\": 1}"
+curl --user igroup:itest -X POST "http://localhost:8840/api/v1/topics" -H "accept: application/json" -H "content-type: application/json" -d "{ \"name\": \"privat-syfo-sm2013-apprec-v1\", \"numPartitions\": 1}"
+curl --user igroup:itest -X POST "http://localhost:8840/api/v1/topics" -H "accept: application/json" -H "content-type: application/json" -d "{ \"name\": \"privat-syfo-sm2013-automatiskBehandling\", \"numPartitions\": 1}"
+curl --user igroup:itest -X POST "http://localhost:8840/api/v1/topics" -H "accept: application/json" -H "content-type: application/json" -d "{ \"name\": \"privat-syfo-sm2013-avvistBehandling\", \"numPartitions\": 1}"
+curl --user igroup:itest -X POST "http://localhost:8840/api/v1/topics" -H "accept: application/json" -H "content-type: application/json" -d "{ \"name\": \"privat-syfo-sm2013-behandlingsUtfall\", \"numPartitions\": 1}"```
